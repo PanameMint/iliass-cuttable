@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Iliass — case study</title>
+<title>Iliass, case study</title>
 <style>
   :root {
     --ink: #111111;
@@ -33,18 +33,49 @@
     padding: 24px 32px;
     max-width: 1040px;
     margin: 0 auto;
+    position: relative;
   }
   .mark { display: flex; align-items: center; gap: 8px; font-size: 17px; font-weight: 700; }
-  .mark .dot { width: 22px; height: 22px; border-radius: 6px; background: var(--ink); display: inline-block; }
-  .top a.cta {
+
+  .contact-btn-wrap { position: relative; }
+  .contact-btn {
     font-size: 14px;
     font-weight: 700;
-    text-decoration: none;
     color: var(--ink);
     background: var(--lime);
     padding: 10px 20px;
     border-radius: 100px;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
   }
+  .contact-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    padding: 8px;
+    min-width: 200px;
+    display: none;
+    z-index: 10;
+  }
+  .contact-menu.open { display: block; }
+  .contact-menu a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--ink);
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .contact-menu a:hover { background: var(--card); }
+  .contact-menu .sub { display: block; font-size: 12px; font-weight: 400; color: var(--muted); }
 
   .hero {
     display: grid;
@@ -90,7 +121,7 @@
     padding: 20px;
   }
   .hero-photo { aspect-ratio: 4 / 3; }
-  .step-photo { aspect-ratio: 16 / 7; margin: 20px 0 0; }
+  .step-photo { aspect-ratio: 16 / 7; margin: 16px 0 0; }
 
   section.steps { padding: 0 0 8px; }
   .step { padding: 32px 0; border-top: 1px solid var(--line); }
@@ -120,20 +151,14 @@
   }
   .step.open .step-toggle { transform: rotate(45deg); background: var(--lime); }
   .step-body { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
-  .step.open .step-body { max-height: 320px; }
+  .step.open .step-body { max-height: 700px; }
   .step-text { font-size: 16px; color: var(--muted); margin: 16px 0 0; max-width: 620px; }
+  .step-text + .step-text { margin-top: 12px; }
 
-  .cta-row { text-align: center; padding: 24px 0 56px; }
-  .cta-row a.cta {
-    display: inline-block;
-    background: var(--lime);
-    color: var(--ink);
-    text-decoration: none;
-    font-size: 15px;
-    font-weight: 700;
-    padding: 14px 28px;
-    border-radius: 100px;
-  }
+  .cta-row { text-align: center; padding: 24px 0 56px; position: relative; }
+  .cta-row .contact-btn-wrap { display: inline-block; }
+  .cta-row .contact-btn { padding: 14px 28px; font-size: 15px; }
+  .cta-row .contact-menu { left: 50%; right: auto; transform: translateX(-50%); }
 
   .testimonial { padding: 8px 0 64px; }
   .testimonial p.quote {
@@ -141,16 +166,48 @@
     font-weight: 500;
     line-height: 1.4;
     letter-spacing: -0.01em;
-    margin: 0 0 16px;
+    margin: 0;
     max-width: 640px;
   }
-  .testimonial .who { font-size: 15px; color: var(--muted); }
+
+  .testimonials { padding: 16px 0 64px; }
+  .t-track { position: relative; min-height: 140px; }
+  .t-card {
+    display: none;
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .t-card.active { display: block; }
+  .t-quote { font-size: 22px; font-weight: 500; line-height: 1.4; letter-spacing: -0.01em; margin: 0 0 16px; }
+  .t-who { font-size: 14px; color: var(--muted); margin: 0; }
+  .t-dots { display: flex; justify-content: center; gap: 8px; margin-top: 28px; }
+  .t-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--line); border: none; cursor: pointer; padding: 0;
+  }
+  .t-card.special {
+    background: #111111;
+    border-radius: 16px;
+    padding: 28px 32px;
+  }
+  .t-card.special .t-quote { color: var(--lime); }
+  .t-card.special .t-who { color: #A8A8A4; }
+  .t-dot.active { background: var(--violet); }
 
   .getintouch {
     background: var(--card);
     border-radius: 24px;
     padding: 48px 40px;
     margin-bottom: 40px;
+  }
+  .getintouch .eyebrow-fr {
+    font-size: 12px;
+    font-weight: 700;
+    font-style: italic;
+    letter-spacing: 0.04em;
+    color: var(--violet);
+    margin: 0 0 14px;
   }
   .getintouch h2 { font-size: 26px; font-weight: 500; margin: 0 0 12px; }
   .getintouch p { font-size: 16px; color: var(--muted); margin: 0 0 20px; }
@@ -180,23 +237,39 @@
 <body>
 
 <header class="top">
-  <div class="mark"><span class="dot"></span>iliass</div>
-  <a class="cta" href="mailto:you@example.com">get in touch</a>
+  <div class="mark">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect x="2" y="8" width="15" height="10" rx="5" fill="#111111"/>
+      <circle cx="18.5" cy="9.5" r="4" fill="#111111"/>
+      <rect x="20.5" y="6" width="3" height="3" rx="1.5" fill="#111111"/>
+      <rect x="4" y="17" width="3" height="5" rx="1.5" fill="#111111"/>
+      <rect x="11" y="17" width="3" height="5" rx="1.5" fill="#111111"/>
+    </svg>
+    iliass
+  </div>
+  <div class="contact-btn-wrap">
+    <button class="contact-btn" onclick="toggleMenu(this)">let's talk</button>
+    <div class="contact-menu">
+      <a href="mailto:YOUR_EMAIL_HERE">Email me<span class="sub">YOUR_EMAIL_HERE</span></a>
+      <a href="tel:YOUR_PHONE_HERE">Call me<span class="sub">YOUR_PHONE_HERE</span></a>
+    </div>
+  </div>
 </header>
 
 <div class="wrap">
   <section class="hero">
     <div>
       <p class="eyebrow">Case study</p>
-      <h1>cuttable wasn't hiring an account executive. they found one anyway.</h1>
-      <p class="sub">Enter Iliass. No marketing team, no inbound queue — three years of finding buyers himself, deal by deal, call by call. The challenge? Prove that closing instinct translates to selling software.</p>
+      <h1>cuttable wasn't hiring an account executive. they found me anyway.</h1>
+      <p class="sub">Enter Iliass. Half a decade selling real estate in Melbourne, finding buyers myself, deal by deal, call by call. The challenge? Prove that closing instinct translates to selling Cuttable.</p>
       <div class="statline">
         <div class="stat"><div class="num">101</div><div class="lbl">deals closed since 2023</div></div>
         <div class="stat"><div class="num">$81.6m+</div><div class="lbl">transaction volume</div></div>
         <div class="stat"><div class="num">900+</div><div class="lbl">prospect database, from zero</div></div>
+        <div class="stat"><div class="num">3.2m</div><div class="lbl">gummy bears consumed</div></div>
       </div>
     </div>
-    <div class="hero-photo">add a photo — headshot, or you at work</div>
+    <div class="hero-photo">add a photo (headshot, or you at work)</div>
   </section>
 
   <section class="steps">
@@ -207,8 +280,11 @@
         <span class="step-toggle">+</span>
       </button>
       <div class="step-body">
-        <p class="step-text">Real estate in Melbourne, commission-only. No marketing team behind him — every deal started with Iliass finding the buyer, running the negotiation, and closing it himself. Fifty-plus cold calls a day, every day, for three years.</p>
-        <div class="step-photo">photo — Iliass at work, or a listing</div>
+        <p class="step-text">Real estate in Melbourne, commission-only. Every deal is really two sales.</p>
+        <p class="step-text">First I win the listing: prospect. Find vendors. Build trust. Stay in touch, sometimes for years, until they're finally ready. "Hey Christine, remember me?" Pitch. List. "No I won't do it for less than 1.8%."</p>
+        <p class="step-text">Then the sale itself starts: finding the right buyer. "The kitchen's a bit small." "Would they take $100K below?" Laugh awkwardly. Negotiate. Deal done. "Congrats, Emma."</p>
+        <p class="step-text">Networking: calls, referrals from past clients. Conveyancers. "How about coffee on Tuesday, Jake?" Brokers. Other agents. "Sh*t, I forgot school pick up time again."</p>
+        <div class="step-photo">photo (you at work, or a listing)</div>
       </div>
     </div>
 
@@ -219,7 +295,7 @@
         <span class="step-toggle">+</span>
       </button>
       <div class="step-body">
-        <p class="step-text">101 transactions worth $81.6M+ since May 2023. Annual volume up from $17.9M to $42.6M in the last year alone. A prospect database built from zero to 900+, entirely self-sourced.</p>
+        <p class="step-text">$17.9M in 2024. $42.6M in 2025. $21.1M so far in 2026. Five-plus years in Melbourne through volatile markets. $1.26M in gross commission introduced.</p>
       </div>
     </div>
 
@@ -230,7 +306,7 @@
         <span class="step-toggle">+</span>
       </button>
       <div class="step-body">
-        <p class="step-text">A closer who's used to zero forgiveness and zero pipeline handed to him — pointed instead at brands that genuinely need what Cuttable does. Same instinct, a better product behind it.</p>
+        <p class="step-text">Real estate taught me how to come up with my own leads. I built the whole pipeline from zero to 900. I've already got the sales skills and the instincts, ready to take on the next challenge. Tech is a natural fit for me. Put me somewhere that rewards actually chasing a target, I'll keep showing up for it and we might even have some fun along the way.</p>
       </div>
     </div>
 
@@ -241,24 +317,73 @@
         <span class="step-toggle">+</span>
       </button>
       <div class="step-body">
-        <p class="step-text">No tech background. No ad-tech resume. Just a proven closer, asking honestly for the chance to prove it fits.</p>
+        <p class="step-text">AI is about to break open advertising's real bottleneck, and Cuttable's right in the middle of it. What you're building gives a growing brand the access to the kind of creative that used to be reserved for the big players.</p>
+        <p class="step-text">I've felt those exact pain points firsthand growing my own brand, in real estate and with Sold Off Market.</p>
+        <p class="step-text">I don't buy that good ads are dead. We are just flooded with generic ones (every time I hear "at brand X, we believe in X" I almost pass out). But we all remember when ads told a story, or inspired an emotion or a reaction, and actually stuck. That's a mission I can get behind.</p>
+        <p class="step-text">And no, I have no formal tech background (yet). But I'm ready to go All In™. You didn't build this by playing it safe. Take the same bet on me.</p>
+        <p class="step-text" style="font-style: italic;">"With great risk comes great potential." — Aunt May (sort of)</p>
       </div>
     </div>
   </section>
 
   <div class="cta-row">
-    <a class="cta" href="mailto:you@example.com">let's talk</a>
+    <div class="contact-btn-wrap">
+      <button class="contact-btn" onclick="toggleMenu(this)">book a demo</button>
+      <div class="contact-menu">
+        <a href="mailto:YOUR_EMAIL_HERE">Email me<span class="sub">YOUR_EMAIL_HERE</span></a>
+        <a href="tel:YOUR_PHONE_HERE">Call me<span class="sub">YOUR_PHONE_HERE</span></a>
+      </div>
+    </div>
   </div>
 
-  <div class="testimonial">
-    <p class="quote">"I've spent three years being the whole funnel. I'd like to be that for you."</p>
-    <p class="who">— Iliass</p>
+  <div class="testimonials">
+    <p class="eyebrow" style="text-align:center;">Don't take my word for it</p>
+    <div class="t-track">
+      <div class="t-card active">
+        <p class="t-quote">"From the outset, Iliass was professional, responsive and easy to deal with. ... Iliass was able to quickly find us a qualified, no-fuss buyer at a price solidly above our reserve/requirements."</p>
+        <p class="t-who">Seller, apartment in Melbourne</p>
+      </div>
+      <div class="t-card">
+        <p class="t-quote">"From the very first meeting he was engaging, confident and very knowledgeable. He was calm, consistent yet determined throughout the sale process and very responsive at all times. He conducted the sale process with integrity and was respectful of all parties."</p>
+        <p class="t-who">Seller, apartment in Elwood</p>
+      </div>
+      <div class="t-card">
+        <p class="t-quote">"I am the one who knocks!"</p>
+        <p class="t-who">Walter White</p>
+      </div>
+      <div class="t-card">
+        <p class="t-quote">"This was a stressful sale and Iliass went out of his way to reassure me through the process. The property was on the market for 10 months with another agent and Iliass sold it in 4 weeks. He was professional and also helped us in finding a rental. He genuinely went above and beyond for us."</p>
+        <p class="t-who">Seller, apartment in Southbank</p>
+      </div>
+      <div class="t-card">
+        <p class="t-quote">"I was so impressed with Iliass Okaf who I found to be a lovely, genuine person. Iliass goes that extra mile to make sure clients needs are met, and is very knowledgeable about the real estate market."</p>
+        <p class="t-who">Buyer, apartment in St Kilda</p>
+      </div>
+      <div class="t-card">
+        <p class="t-quote">"I had the pleasure of working with Iliass when selling my property, & I couldn't be more impressed. He was professional, knowledgeable, & always available to answer my questions. ... His dedication & attention to detail made the entire process smooth & stress-free."</p>
+        <p class="t-who">Seller, apartment in Southbank</p>
+      </div>
+      <div class="t-card">
+        <p class="t-quote">"From the moment we had our first meeting, Iliass impressed me with his promptness, his fact based information, and his relaxed yet professional attitude. Iliass was open and honest through all stages of our campaign. Whilst the 'selling' journey is emotional, Iliass guided me through the campaign with clear/concise communications. His personal negotiations with buyers cemented what was an enviable result."</p>
+        <p class="t-who">Seller, apartment in St Kilda</p>
+      </div>
+    </div>
+    <div class="t-dots">
+      <button class="t-dot active" onclick="goToTestimonial(0)" aria-label="Testimonial 1"></button>
+      <button class="t-dot" onclick="goToTestimonial(1)" aria-label="Testimonial 2"></button>
+      <button class="t-dot" onclick="goToTestimonial(2)" aria-label="Testimonial 3"></button>
+      <button class="t-dot" onclick="goToTestimonial(3)" aria-label="Testimonial 4"></button>
+      <button class="t-dot" onclick="goToTestimonial(4)" aria-label="Testimonial 5"></button>
+      <button class="t-dot" onclick="goToTestimonial(5)" aria-label="Testimonial 6"></button>
+      <button class="t-dot" onclick="goToTestimonial(6)" aria-label="Testimonial 7"></button>
+    </div>
   </div>
 
   <div class="getintouch">
-    <h2>We would love to hear from you.</h2>
-    <p>Feel free to reach out if you'd like to talk, or just say hello.</p>
-    <a class="email" href="mailto:you@example.com">you@example.com</a>
+    <p class="eyebrow-fr">candidature spontanée</p>
+    <h2>I am used to making the first move.</h2>
+    <p>I'd love to work with you. Coffee's on me, you pick when.</p>
+    <a class="email" href="mailto:YOUR_EMAIL_HERE">YOUR_EMAIL_HERE</a>
   </div>
 
   <footer>
@@ -277,6 +402,28 @@
     });
     if (!wasOpen) { step.classList.add('open'); }
   }
+
+  function toggleMenu(btn) {
+    var menu = btn.nextElementSibling;
+    var wasOpen = menu.classList.contains('open');
+    document.querySelectorAll('.contact-menu.open').forEach(function(m) { m.classList.remove('open'); });
+    if (!wasOpen) { menu.classList.add('open'); }
+  }
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.contact-btn-wrap')) {
+      document.querySelectorAll('.contact-menu.open').forEach(function(m) { m.classList.remove('open'); });
+    }
+  });
+
+  function goToTestimonial(i) {
+    document.querySelectorAll('.t-card').forEach(function(c, idx) { c.classList.toggle('active', idx === i); });
+    document.querySelectorAll('.t-dot').forEach(function(d, idx) { d.classList.toggle('active', idx === i); });
+  }
+  var tIndex = 0;
+  setInterval(function() {
+    var cards = document.querySelectorAll('.t-card');
+    if (cards.length) { tIndex = (tIndex + 1) % cards.length; goToTestimonial(tIndex); }
+  }, 5000);
 </script>
 
 </body>
