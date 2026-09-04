@@ -124,36 +124,24 @@
   .step-photo { aspect-ratio: 16 / 7; margin: 16px 0 0; }
 
   section.steps { padding: 0 0 8px; }
-  .step { padding: 32px 0; border-top: 1px solid var(--line); }
+  .step {
+    padding: 48px 0;
+    border-top: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+  .step:nth-child(even) .step-content { order: 2; }
+  .step:nth-child(even) .step-photo { order: 1; }
   .step-num {
     font-size: 13px; color: var(--violet); font-weight: 700;
     text-transform: uppercase; letter-spacing: 0.04em; margin: 0 0 10px;
   }
-  .step-head {
-    width: 100%;
-    background: none;
-    border: none;
-    text-align: left;
-    cursor: pointer;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    font-family: inherit;
-    color: var(--ink);
-  }
-  .step-title { font-size: 24px; font-weight: 500; letter-spacing: -0.01em; margin: 0; max-width: 620px; flex: 1; }
-  .step-toggle {
-    font-size: 16px; flex-shrink: 0;
-    width: 30px; height: 30px; border-radius: 50%; background: var(--lavender);
-    display: flex; align-items: center; justify-content: center;
-    transition: transform 0.2s ease, background 0.2s ease;
-  }
-  .step.open .step-toggle { transform: rotate(45deg); background: var(--lime); }
-  .step-body { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
-  .step.open .step-body { max-height: 700px; }
-  .step-text { font-size: 16px; color: var(--muted); margin: 16px 0 0; max-width: 620px; }
+  .step-title { font-size: 24px; font-weight: 500; letter-spacing: -0.01em; margin: 0; }
+  .step-text { font-size: 16px; color: var(--muted); margin: 16px 0 0; }
   .step-text + .step-text { margin-top: 12px; }
+  .step .step-photo { margin: 0; aspect-ratio: 4 / 3; }
 
   .cta-row { text-align: center; padding: 24px 0 56px; position: relative; }
   .cta-row .contact-btn-wrap { display: inline-block; }
@@ -238,13 +226,7 @@
 
 <header class="top">
   <div class="mark">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <rect x="2" y="8" width="15" height="10" rx="5" fill="#111111"/>
-      <circle cx="18.5" cy="9.5" r="4" fill="#111111"/>
-      <rect x="20.5" y="6" width="3" height="3" rx="1.5" fill="#111111"/>
-      <rect x="4" y="17" width="3" height="5" rx="1.5" fill="#111111"/>
-      <rect x="11" y="17" width="3" height="5" rx="1.5" fill="#111111"/>
-    </svg>
+    <img src="helmet-icon.png" alt="" width="24" height="24" style="display:block;"/>
     iliass
   </div>
   <div class="contact-btn-wrap">
@@ -261,7 +243,7 @@
     <div>
       <p class="eyebrow">Case study</p>
       <h1>cuttable wasn't hiring an account executive. they found me anyway.</h1>
-      <p class="sub">Enter Iliass. Half a decade selling real estate in Melbourne, finding buyers myself, deal by deal, call by call. The challenge? Prove that closing instinct translates to selling Cuttable.</p>
+      <p class="sub">Enter Iliass. Half a decade selling real estate. Negotiating deals. Building connections. The challenge? Prove those skills are directly transferable to selling Cuttable.</p>
       <div class="statline">
         <div class="stat"><div class="num">101</div><div class="lbl">deals closed since 2023</div></div>
         <div class="stat"><div class="num">$81.6m+</div><div class="lbl">transaction volume</div></div>
@@ -273,56 +255,47 @@
   </section>
 
   <section class="steps">
-    <div class="step open">
-      <p class="step-num">Step 1</p>
-      <button class="step-head" onclick="toggleStep(this)">
+    <div class="step">
+      <div class="step-content">
+        <p class="step-num">Step 1</p>
         <h3 class="step-title">The playbook, decoded</h3>
-        <span class="step-toggle">+</span>
-      </button>
-      <div class="step-body">
         <p class="step-text">Real estate in Melbourne, commission-only. Every deal is really two sales.</p>
-        <p class="step-text">First I win the listing: prospect. Find vendors. Build trust. Stay in touch, sometimes for years, until they're finally ready. "Hey Christine, remember me?" Pitch. List. "No I won't do it for less than 1.8%."</p>
-        <p class="step-text">Then the sale itself starts: finding the right buyer. "The kitchen's a bit small." "Would they take $100K below?" Laugh awkwardly. Negotiate. Deal done. "Congrats, Emma."</p>
-        <p class="step-text">Networking: calls, referrals from past clients. Conveyancers. "How about coffee on Tuesday, Jake?" Brokers. Other agents. "Sh*t, I forgot school pick up time again."</p>
-        <div class="step-photo">photo (you at work, or a listing)</div>
+        <p class="step-text">First I win the listing: prospect. Find vendors. Build trust. Stay in touch, sometimes for years. "Hey Christine, remember me?" Pitch. List. "No I won't do it for less than 1.8%."</p>
+        <p class="step-text">Then the sale itself starts: opens. Calls. "The kitchen's a bit small." Find the right buyer. "Would they take $100K below?" Laugh awkwardly. Negotiate. Deal done. "Congrats, Emma." Champagne.</p>
+        <p class="step-text">Networking: More Calls. Referrals from past clients. Conveyancers. "How about coffee on Tuesday, Jake?" Brokers. Other agents. "Sh*t, I forgot school pick up time again."</p>
       </div>
+      <div class="step-photo">photo (you at work, or a listing)</div>
     </div>
 
     <div class="step">
-      <p class="step-num">Step 2</p>
-      <button class="step-head" onclick="toggleStep(this)">
+      <div class="step-content">
+        <p class="step-num">Step 2</p>
         <h3 class="step-title">The track record, organised</h3>
-        <span class="step-toggle">+</span>
-      </button>
-      <div class="step-body">
         <p class="step-text">$17.9M in 2024. $42.6M in 2025. $21.1M so far in 2026. Five-plus years in Melbourne through volatile markets. $1.26M in gross commission introduced.</p>
       </div>
+      <div class="step-photo">photo (a chart, a listing, an award, whatever proves it)</div>
     </div>
 
     <div class="step">
-      <p class="step-num">Step 3</p>
-      <button class="step-head" onclick="toggleStep(this)">
-        <h3 class="step-title">What that becomes in a sales seat</h3>
-        <span class="step-toggle">+</span>
-      </button>
-      <div class="step-body">
+      <div class="step-content">
+        <p class="step-num">Step 3</p>
+        <h3 class="step-title">My skills & instincts become your pipeline</h3>
         <p class="step-text">Real estate taught me how to come up with my own leads. I built the whole pipeline from zero to 900. I've already got the sales skills and the instincts, ready to take on the next challenge. Tech is a natural fit for me. Put me somewhere that rewards actually chasing a target, I'll keep showing up for it and we might even have some fun along the way.</p>
       </div>
+      <div class="step-photo">photo (you, at your desk or in the field)</div>
     </div>
 
     <div class="step">
-      <p class="step-num">Step 4</p>
-      <button class="step-head" onclick="toggleStep(this)">
-        <h3 class="step-title">Ready to publish</h3>
-        <span class="step-toggle">+</span>
-      </button>
-      <div class="step-body">
+      <div class="step-content">
+        <p class="step-num">Step 4</p>
+        <h3 class="step-title">Why Cuttable, why now</h3>
         <p class="step-text">AI is about to break open advertising's real bottleneck, and Cuttable's right in the middle of it. What you're building gives a growing brand the access to the kind of creative that used to be reserved for the big players.</p>
         <p class="step-text">I've felt those exact pain points firsthand growing my own brand, in real estate and with Sold Off Market.</p>
         <p class="step-text">I don't buy that good ads are dead. We are just flooded with generic ones (every time I hear "at brand X, we believe in X" I almost pass out). But we all remember when ads told a story, or inspired an emotion or a reaction, and actually stuck. That's a mission I can get behind.</p>
         <p class="step-text">And no, I have no formal tech background (yet). But I'm ready to go All In™. You didn't build this by playing it safe. Take the same bet on me.</p>
         <p class="step-text" style="font-style: italic;">"With great risk comes great potential." — Aunt May (sort of)</p>
       </div>
+      <div class="step-photo">photo (something forward-looking, your call)</div>
     </div>
   </section>
 
@@ -380,10 +353,9 @@
   </div>
 
   <div class="getintouch">
-    <p class="eyebrow-fr">candidature spontanée</p>
-    <h2>I am used to making the first move.</h2>
+    <h2>I am French, I am used to making the first move.</h2>
     <p>I'd love to work with you. Coffee's on me, you pick when.</p>
-    <a class="email" href="mailto:YOUR_EMAIL_HERE">YOUR_EMAIL_HERE</a>
+    <a class="email" href="mailto:YOUR_EMAIL_HERE">We are in, tell us more</a>
   </div>
 
   <footer>
@@ -393,16 +365,6 @@
 </div>
 
 <script>
-  function toggleStep(btn) {
-    var step = btn.parentElement;
-    var wasOpen = step.classList.contains('open');
-    document.querySelectorAll('.step.open').forEach(function(s) {
-      s.classList.remove('open');
-      s.querySelector('.step-toggle').textContent = '+';
-    });
-    if (!wasOpen) { step.classList.add('open'); }
-  }
-
   function toggleMenu(btn) {
     var menu = btn.nextElementSibling;
     var wasOpen = menu.classList.contains('open');
