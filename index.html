@@ -302,10 +302,10 @@
         <p class="step-text">Networking: More Calls. Referrals from past clients. Conveyancers. "How about coffee on Tuesday, Jake?" Brokers. Other agents. "Sh*t, I forgot school pick up time again."</p>
       </div>
       <div class="step-photo video-grid">
-        <video src="listing-1.mp4" muted autoplay loop playsinline></video>
-        <video src="listing-2.mp4" muted autoplay loop playsinline></video>
-        <video src="listing-3.mp4" muted autoplay loop playsinline></video>
-        <video src="listing-4.mp4" muted autoplay loop playsinline></video>
+        <video data-src="listing-1.mp4" muted loop playsinline preload="none"></video>
+        <video data-src="listing-2.mp4" muted loop playsinline preload="none"></video>
+        <video data-src="listing-3.mp4" muted loop playsinline preload="none"></video>
+        <video data-src="listing-4.mp4" muted loop playsinline preload="none"></video>
       </div>
     </div>
 
@@ -327,12 +327,12 @@
       <div class="step-photo media-scatter">
         <div class="wheel">
           <div class="m-card-wrap" style="top:6.5%; left:40.5%;"><div class="m-card"><img src="photo-1.jpg" alt=""/></div></div>
-          <div class="m-card-wrap" style="top:18.9%; left:66.3%;"><div class="m-card"><video src="video-1.mp4" muted autoplay loop playsinline preload="auto"></video></div></div>
+          <div class="m-card-wrap" style="top:18.9%; left:66.3%;"><div class="m-card"><video data-src="video-1.mp4" muted loop playsinline preload="none"></video></div></div>
           <div class="m-card-wrap" style="top:46.8%; left:72.7%;"><div class="m-card"><img src="photo-2.jpg" alt=""/></div></div>
           <div class="m-card-wrap" style="top:69.2%; left:54.8%;"><div class="m-card"><img src="photo-3.JPG" alt=""/></div></div>
-          <div class="m-card-wrap" style="top:69.2%; left:26.2%;"><div class="m-card"><video src="video-2.mp4" muted autoplay loop playsinline></video></div></div>
+          <div class="m-card-wrap" style="top:69.2%; left:26.2%;"><div class="m-card"><video data-src="video-2.mp4" muted loop playsinline preload="none"></video></div></div>
           <div class="m-card-wrap" style="top:46.8%; left:8.3%;"><div class="m-card"><img src="photo-5.jpg" alt=""/></div></div>
-          <div class="m-card-wrap" style="top:18.9%; left:14.7%;"><div class="m-card"><video src="video-3.mp4" muted autoplay loop playsinline preload="auto"></video></div></div>
+          <div class="m-card-wrap" style="top:18.9%; left:14.7%;"><div class="m-card"><video data-src="video-3.mp4" muted loop playsinline preload="none"></video></div></div>
         </div>
       </div>
     </div>
@@ -438,6 +438,19 @@
     var cards = document.querySelectorAll('.t-card');
     if (cards.length) { tIndex = (tIndex + 1) % cards.length; goToTestimonial(tIndex); }
   }, 5000);
+  var lazyVideos = document.querySelectorAll('video[data-src]');
+  var videoObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        var v = entry.target;
+        v.src = v.dataset.src;
+        v.load();
+        v.play().catch(function() {});
+        videoObserver.unobserve(v);
+      }
+    });
+  }, { rootMargin: '300px' });
+  lazyVideos.forEach(function(v) { videoObserver.observe(v); });
 </script>
 
 </body>
