@@ -142,6 +142,17 @@
   .step-text { font-size: 16px; color: var(--muted); margin: 16px 0 0; }
   .step-text + .step-text { margin-top: 12px; }
   .step .step-photo { margin: 0; aspect-ratio: 4 / 3; }
+  .media-scatter { position: relative; border: none; padding: 0; display: block; overflow: visible; }
+  .m-card {
+    position: absolute;
+    width: 42%;
+    height: 46%;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    border: 3px solid var(--paper);
+  }
+  .m-card img, .m-card video { width: 100%; height: 100%; object-fit: cover; display: block; }
   .video-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -248,8 +259,8 @@
   <div class="contact-btn-wrap">
     <button class="contact-btn" onclick="toggleMenu(this)">let's talk</button>
     <div class="contact-menu">
-      <a href="mailto:YOUR_EMAIL_HERE">Email me<span class="sub">YOUR_EMAIL_HERE</span></a>
-      <a href="tel:YOUR_PHONE_HERE">Call me<span class="sub">YOUR_PHONE_HERE</span></a>
+      <a href="mailto:iliass.wagner@gmail.com">Email me<span class="sub">iliass.wagner@gmail.com</span></a>
+      <a href="tel:0481797691">Call me<span class="sub">0481797691</span></a>
     </div>
   </div>
 </header>
@@ -303,7 +314,15 @@
         <h3 class="step-title">My skills & instincts become your pipeline</h3>
         <p class="step-text">Real estate taught me how to come up with my own leads. I built the whole pipeline from zero to 900. I've already got the sales skills and the instincts, ready to take on the next challenge. Tech is a natural fit for me. Put me somewhere that rewards actually chasing a target, I'll keep showing up for it and we might even have some fun along the way.</p>
       </div>
-      <div class="step-photo">photo (you, at your desk or in the field)</div>
+      <div class="step-photo media-scatter">
+        <div class="m-card" style="top:0%; left:0%; transform:rotate(-10deg); z-index:1;"><img src="photo-1.jpg" alt=""/></div>
+        <div class="m-card" style="top:22%; left:14%; transform:rotate(6deg); z-index:2;"><img src="photo-2.jpg" alt=""/></div>
+        <div class="m-card" style="top:2%; left:30%; transform:rotate(-4deg); z-index:3;"><video src="video-1.mp4" muted autoplay loop playsinline></video></div>
+        <div class="m-card" style="top:24%; left:44%; transform:rotate(9deg); z-index:4;"><img src="photo-3.jpg" alt=""/></div>
+        <div class="m-card" style="top:0%; left:58%; transform:rotate(-8deg); z-index:5;"><img src="photo-4.jpg" alt=""/></div>
+        <div class="m-card" style="top:20%; left:56%; transform:rotate(12deg); z-index:6;"><video src="video-2.mp4" muted autoplay loop playsinline></video></div>
+        <div class="m-card" style="top:8%; left:44%; transform:rotate(-2deg); z-index:7;"><img src="photo-5.jpg" alt=""/></div>
+      </div>
     </div>
 
     <div class="step">
@@ -373,8 +392,8 @@
     <div class="contact-btn-wrap">
       <button class="email" onclick="toggleMenu(this)">book a demo</button>
       <div class="contact-menu">
-        <a href="mailto:YOUR_EMAIL_HERE">Email me<span class="sub">YOUR_EMAIL_HERE</span></a>
-        <a href="tel:YOUR_PHONE_HERE">Call me<span class="sub">YOUR_PHONE_HERE</span></a>
+        <a href="mailto:iliass.wagner@gmail.com">Email me<span class="sub">iliass.wagner@gmail.com</span></a>
+        <a href="tel:0481797691">Call me<span class="sub">0481797691</span></a>
       </div>
     </div>
   </div>
