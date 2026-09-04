@@ -93,13 +93,35 @@
   .step-photo { aspect-ratio: 16 / 7; margin: 20px 0 0; }
 
   section.steps { padding: 0 0 8px; }
-  .step { padding: 40px 0; border-top: 1px solid var(--line); }
+  .step { padding: 32px 0; border-top: 1px solid var(--line); }
   .step-num {
     font-size: 13px; color: var(--violet); font-weight: 700;
     text-transform: uppercase; letter-spacing: 0.04em; margin: 0 0 10px;
   }
-  .step-title { font-size: 24px; font-weight: 500; letter-spacing: -0.01em; margin: 0 0 12px; max-width: 620px; }
-  .step-text { font-size: 16px; color: var(--muted); margin: 0; max-width: 620px; }
+  .step-head {
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-family: inherit;
+    color: var(--ink);
+  }
+  .step-title { font-size: 24px; font-weight: 500; letter-spacing: -0.01em; margin: 0; max-width: 620px; flex: 1; }
+  .step-toggle {
+    font-size: 16px; flex-shrink: 0;
+    width: 30px; height: 30px; border-radius: 50%; background: var(--lavender);
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+  .step.open .step-toggle { transform: rotate(45deg); background: var(--lime); }
+  .step-body { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+  .step.open .step-body { max-height: 320px; }
+  .step-text { font-size: 16px; color: var(--muted); margin: 16px 0 0; max-width: 620px; }
 
   .cta-row { text-align: center; padding: 24px 0 56px; }
   .cta-row a.cta {
@@ -178,29 +200,49 @@
   </section>
 
   <section class="steps">
-    <div class="step">
+    <div class="step open">
       <p class="step-num">Step 1</p>
-      <h3 class="step-title">The playbook, decoded</h3>
-      <p class="step-text">Real estate in Melbourne, commission-only. No marketing team behind him — every deal started with Iliass finding the buyer, running the negotiation, and closing it himself. Fifty-plus cold calls a day, every day, for three years.</p>
-      <div class="step-photo">photo — Iliass at work, or a listing</div>
+      <button class="step-head" onclick="toggleStep(this)">
+        <h3 class="step-title">The playbook, decoded</h3>
+        <span class="step-toggle">+</span>
+      </button>
+      <div class="step-body">
+        <p class="step-text">Real estate in Melbourne, commission-only. No marketing team behind him — every deal started with Iliass finding the buyer, running the negotiation, and closing it himself. Fifty-plus cold calls a day, every day, for three years.</p>
+        <div class="step-photo">photo — Iliass at work, or a listing</div>
+      </div>
     </div>
 
     <div class="step">
       <p class="step-num">Step 2</p>
-      <h3 class="step-title">The track record, organised</h3>
-      <p class="step-text">101 transactions worth $81.6M+ since May 2023. Annual volume up from $17.9M to $42.6M in the last year alone. A prospect database built from zero to 900+, entirely self-sourced.</p>
+      <button class="step-head" onclick="toggleStep(this)">
+        <h3 class="step-title">The track record, organised</h3>
+        <span class="step-toggle">+</span>
+      </button>
+      <div class="step-body">
+        <p class="step-text">101 transactions worth $81.6M+ since May 2023. Annual volume up from $17.9M to $42.6M in the last year alone. A prospect database built from zero to 900+, entirely self-sourced.</p>
+      </div>
     </div>
 
     <div class="step">
       <p class="step-num">Step 3</p>
-      <h3 class="step-title">What that becomes in a sales seat</h3>
-      <p class="step-text">A closer who's used to zero forgiveness and zero pipeline handed to him — pointed instead at brands that genuinely need what Cuttable does. Same instinct, a better product behind it.</p>
+      <button class="step-head" onclick="toggleStep(this)">
+        <h3 class="step-title">What that becomes in a sales seat</h3>
+        <span class="step-toggle">+</span>
+      </button>
+      <div class="step-body">
+        <p class="step-text">A closer who's used to zero forgiveness and zero pipeline handed to him — pointed instead at brands that genuinely need what Cuttable does. Same instinct, a better product behind it.</p>
+      </div>
     </div>
 
     <div class="step">
       <p class="step-num">Step 4</p>
-      <h3 class="step-title">Ready to publish</h3>
-      <p class="step-text">No tech background. No ad-tech resume. Just a proven closer, asking honestly for the chance to prove it fits.</p>
+      <button class="step-head" onclick="toggleStep(this)">
+        <h3 class="step-title">Ready to publish</h3>
+        <span class="step-toggle">+</span>
+      </button>
+      <div class="step-body">
+        <p class="step-text">No tech background. No ad-tech resume. Just a proven closer, asking honestly for the chance to prove it fits.</p>
+      </div>
     </div>
   </section>
 
@@ -224,6 +266,18 @@
     <span><a href="https://linkedin.com/in/iliass-okaf-a12274212">LinkedIn</a></span>
   </footer>
 </div>
+
+<script>
+  function toggleStep(btn) {
+    var step = btn.parentElement;
+    var wasOpen = step.classList.contains('open');
+    document.querySelectorAll('.step.open').forEach(function(s) {
+      s.classList.remove('open');
+      s.querySelector('.step-toggle').textContent = '+';
+    });
+    if (!wasOpen) { step.classList.add('open'); }
+  }
+</script>
 
 </body>
 </html>
