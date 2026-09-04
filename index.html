@@ -144,13 +144,13 @@
   .step .step-photo { margin: 0; aspect-ratio: 4 / 3; }
   .step .step-photo.media-scatter { aspect-ratio: 1 / 1; }
   .media-scatter { position: relative; border: none; padding: 0; display: block; overflow: visible; background: none; }
-  .wheel { position: absolute; inset: 0; animation: wheel-spin 40s linear infinite; }
+  .wheel { position: absolute; inset: 0; animation: wheel-spin 90s linear infinite; }
   @keyframes wheel-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
   .m-card-wrap {
     position: absolute;
     width: 19%;
     height: 21%;
-    animation: card-counter-spin 40s linear infinite;
+    animation: card-counter-spin 90s linear infinite;
   }
   @keyframes card-counter-spin { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
   .m-card {
@@ -160,6 +160,7 @@
     overflow: hidden;
     box-shadow: 0 6px 18px rgba(0,0,0,0.12);
     border: 3px solid var(--paper);
+    background: var(--card);
   }
   .m-card img, .m-card video { width: 100%; height: 100%; object-fit: cover; display: block; }
   .video-grid {
@@ -326,9 +327,9 @@
       <div class="step-photo media-scatter">
         <div class="wheel">
           <div class="m-card-wrap" style="top:6.5%; left:40.5%;"><div class="m-card"><img src="photo-1.jpg" alt=""/></div></div>
-          <div class="m-card-wrap" style="top:18.9%; left:66.3%;"><div class="m-card"><video src="video-1.mp4" muted autoplay loop playsinline></video></div></div>
+          <div class="m-card-wrap" style="top:18.9%; left:66.3%;"><div class="m-card"><video src="video-1.mp4" muted autoplay loop playsinline preload="auto"></video></div></div>
           <div class="m-card-wrap" style="top:46.8%; left:72.7%;"><div class="m-card"><img src="photo-2.jpg" alt=""/></div></div>
-          <div class="m-card-wrap" style="top:69.2%; left:54.8%;"><div class="m-card"><img src="photo-3.jpg" alt=""/></div></div>
+          <div class="m-card-wrap" style="top:69.2%; left:54.8%;"><div class="m-card"><img src="photo-3.JPG" alt=""/></div></div>
           <div class="m-card-wrap" style="top:69.2%; left:26.2%;"><div class="m-card"><video src="video-2.mp4" muted autoplay loop playsinline></video></div></div>
           <div class="m-card-wrap" style="top:46.8%; left:8.3%;"><div class="m-card"><img src="photo-4.jpg" alt=""/></div></div>
           <div class="m-card-wrap" style="top:18.9%; left:14.7%;"><div class="m-card"><img src="photo-5.jpg" alt=""/></div></div>
