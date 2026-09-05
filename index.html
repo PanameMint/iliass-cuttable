@@ -120,7 +120,8 @@
     text-align: center;
     padding: 20px;
   }
-  .hero-photo { aspect-ratio: 4 / 3; }
+  .hero-photo { aspect-ratio: 9 / 16; overflow: hidden; padding: 0; border: none; }
+  .hero-photo img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 20px; }
   .step-photo { aspect-ratio: 16 / 7; margin: 16px 0 0; }
 
   section.steps { padding: 0 0 8px; }
@@ -142,6 +143,22 @@
   .step-text { font-size: 16px; color: var(--muted); margin: 16px 0 0; }
   .step-text + .step-text { margin-top: 12px; }
   .step .step-photo { margin: 0; aspect-ratio: 4 / 3; }
+  .step .step-photo.step2-visual {
+    aspect-ratio: 1 / 1;
+    border: none;
+    padding: 24px;
+    background: var(--lime);
+    border-radius: 32px;
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 20px;
+  }
+  .step2-photo-inner { border-radius: 16px; overflow: hidden; }
+  .step2-photo-inner img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .step2-stats { display: flex; flex-direction: column; justify-content: space-between; }
+  .step2-stat .stat-label { font-size: 13px; color: var(--ink); font-weight: 500; margin: 0 0 2px; }
+  .step2-stat .stat-value { font-size: 22px; font-weight: 800; color: var(--ink); margin: 0 0 6px; }
+  .step2-stat svg { display: block; width: 100%; height: 16px; }
   .step .step-photo.media-scatter { aspect-ratio: 1 / 1; }
   .media-scatter { position: relative; border: none; padding: 0; display: block; overflow: visible; background: none; }
   .wheel { position: absolute; inset: 0; animation: wheel-spin 90s linear infinite; }
@@ -279,7 +296,7 @@
   <section class="hero">
     <div>
       <p class="eyebrow">Case study</p>
-      <h1>cuttable wasn't hiring an account executive. they found me anyway.</h1>
+      <h1>cuttable wasn't hiring an account executive. they found one anyway.</h1>
       <p class="sub">Enter Iliass. Half a decade selling real estate. Negotiating deals. Building connections. The challenge? Prove those skills are directly transferable to selling Cuttable.</p>
       <div class="statline">
         <div class="stat"><div class="num">101</div><div class="lbl">deals closed since 2023</div></div>
@@ -288,7 +305,7 @@
         <div class="stat"><div class="num">3.2m</div><div class="lbl">gummy bears consumed</div></div>
       </div>
     </div>
-    <div class="hero-photo">add a photo (headshot, or you at work)</div>
+    <div class="hero-photo"><img src="hero-ad.png" alt="Learns like a rookie. Isn't. — iliass, the closed beta hire."/></div>
   </section>
 
   <section class="steps">
@@ -315,7 +332,26 @@
         <h3 class="step-title">The track record, organised</h3>
         <p class="step-text">$17.9M in 2024. $42.6M in 2025. $21.1M so far in 2026. Five-plus years in Melbourne through volatile markets. $1.26M in gross commission introduced.</p>
       </div>
-      <div class="step-photo">photo (a chart, a listing, an award, whatever proves it)</div>
+      <div class="step-photo step2-visual">
+        <div class="step2-photo-inner"><img src="step2-photo.png" alt="Iliass"/></div>
+        <div class="step2-stats">
+          <div class="step2-stat">
+            <p class="stat-label">2024</p>
+            <p class="stat-value">$17.9M</p>
+            <svg viewBox="0 0 160 20"><path d="M0,11 C8,3 16,17 26,8 C36,1 46,16 58,9 C70,3 80,15 92,8 C104,3 116,14 128,9 C138,5 148,10 160,7" fill="none" stroke="var(--violet)" stroke-width="3" stroke-linecap="round"/></svg>
+          </div>
+          <div class="step2-stat">
+            <p class="stat-label">2025</p>
+            <p class="stat-value">$42.6M</p>
+            <svg viewBox="0 0 160 20"><path d="M0,11 C8,3 16,17 26,8 C36,1 46,16 58,9 C70,3 80,15 92,8 C104,3 116,14 128,9 C138,5 148,10 160,7" fill="none" stroke="var(--violet)" stroke-width="3" stroke-linecap="round"/></svg>
+          </div>
+          <div class="step2-stat">
+            <p class="stat-label">2026 (so far)</p>
+            <p class="stat-value">$21.1M</p>
+            <svg viewBox="0 0 160 20"><path d="M0,11 C8,3 16,17 26,8 C36,1 46,16 58,9 C70,3 80,15 92,8 C104,3 116,14 128,9 C138,5 148,10 160,7" fill="none" stroke="var(--violet)" stroke-width="3" stroke-linecap="round"/></svg>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="step">
@@ -344,7 +380,7 @@
         <p class="step-text">AI is about to break open advertising's real bottleneck, and Cuttable's right in the middle of it. What you're building gives a growing brand the access to the kind of creative that used to be reserved for the big players.</p>
         <p class="step-text">I've felt those exact pain points firsthand growing my own brand, in real estate and with Sold Off Market.</p>
         <p class="step-text">I don't buy that good ads are dead. We are just flooded with generic ones (every time I hear "at brand X, we believe in X" I almost pass out). But we all remember when ads told a story, or inspired an emotion or a reaction, and actually stuck. That's a mission I can get behind.</p>
-        <p class="step-text">And no, I have no formal tech background (yet). But I'm ready to go All In™. You didn't build this by playing it safe. Take the same bet on me.</p>
+        <p class="step-text">And no, I have no formal tech background (yet). But I'm ready to go All In. You didn't build this by playing it safe. Take the same bet on me.</p>
         <p class="step-text" style="font-style: italic;">"With great risk comes great potential." — Aunt May (sort of)</p>
       </div>
       <div class="step-photo">photo (something forward-looking, your call)</div>
