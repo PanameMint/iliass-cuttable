@@ -6,12 +6,12 @@
 <title>Iliass, case study</title>
 <style>
   :root {
-    --ink: #111111;
+    --ink: #161616;
     --paper: #FFFFFF;
     --card: #F5F5F4;
-    --lime: #D6F14C;
-    --lavender: #DCD1F7;
-    --violet: #6656E3;
+    --lime: #B2FE15;
+    --lavender: #E4D0FF;
+    --violet: #634CFF;
     --line: #E7E5E0;
     --muted: #5B5A56;
   }
@@ -21,7 +21,7 @@
     margin: 0;
     background: var(--paper);
     color: var(--ink);
-    font-family: -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "PolySans", -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif;
     line-height: 1.5;
   }
   .wrap { max-width: 1040px; margin: 0 auto; padding: 0 32px; }
@@ -40,7 +40,8 @@
   .contact-btn-wrap { position: relative; }
   .contact-btn {
     font-size: 14px;
-    font-weight: 700;
+    font-weight: 600;
+    letter-spacing: -0.4px;
     color: var(--ink);
     background: var(--lime);
     padding: 10px 20px;
@@ -95,8 +96,8 @@
   h1 {
     font-size: 42px;
     line-height: 1.14;
-    letter-spacing: -0.01em;
-    font-weight: 500;
+    letter-spacing: -0.02em;
+    font-weight: 600;
     margin: 0 0 20px;
   }
   .hero p.sub {
@@ -138,7 +139,7 @@
   .step:nth-child(even) .step-photo { order: 1; }
   .step-num {
     font-size: 13px; color: var(--violet); font-weight: 700;
-    text-transform: uppercase; letter-spacing: 0.04em; margin: 0 0 10px;
+    letter-spacing: 0.04em; margin: 0;
   }
   .step-title { font-size: 24px; font-weight: 500; letter-spacing: -0.01em; margin: 0; }
   .step-text { font-size: 16px; color: var(--muted); margin: 16px 0 0; }
@@ -153,6 +154,31 @@
     display: grid;
     grid-template-columns: 1fr 1.3fr;
     gap: 16px;
+    position: relative;
+    transform: rotate(-4deg);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.14);
+  }
+  .step2-badge {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--paper);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+  }
+  .step-num-row { display: flex; align-items: center; gap: 8px; margin: 0 0 10px; }
+  .step-num-circle {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
   }
   .step2-photo-inner { border-radius: 14px; overflow: hidden; aspect-ratio: 3 / 4; }
   .step2-photo-inner img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -229,7 +255,7 @@
     background: var(--line); border: none; cursor: pointer; padding: 0;
   }
   .t-card.special {
-    background: #111111;
+    background: #161616;
     border-radius: 16px;
     padding: 28px 32px;
   }
@@ -254,7 +280,7 @@
   .getintouch h2 { font-size: 26px; font-weight: 500; margin: 0 0 12px; }
   .getintouch p { font-size: 16px; color: var(--muted); margin: 0 0 20px; }
   .getintouch .email {
-    font-size: 16px; font-weight: 700; color: var(--ink);
+    font-size: 16px; font-weight: 600; letter-spacing: -0.4px; color: var(--ink);
     background: var(--lavender); padding: 10px 18px; border-radius: 100px; text-decoration: none;
     border: none; cursor: pointer; font-family: inherit;
   }
@@ -312,8 +338,8 @@
   <section class="steps">
     <div class="step">
       <div class="step-content">
-        <p class="step-num">Step 1</p>
-        <h3 class="step-title">The playbook, decoded</h3>
+        <div class="step-num-row"><div class="step-num-circle"><svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#67DE89" stroke="#161616" stroke-width="2"/><path d="M7 12.5L10.5 16L17 8" fill="none" stroke="#161616" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 12.5L10.5 16L17 8" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><p class="step-num">Step 1</p></div>
+        <h3 class="step-title">the playbook, decoded</h3>
         <p class="step-text">Real estate in Melbourne, commission-only. Every deal is really two sales.</p>
         <p class="step-text">First I win the listing: prospect. Find vendors. Build trust. Stay in touch, sometimes for years. "Hey Christine, remember me?" Pitch. List. "No I won't do it for less than 1.8%."</p>
         <p class="step-text">Then the sale itself starts: opens. Calls. "The kitchen's a bit small." Find the right buyer. "Would they take $100K below?" Laugh awkwardly. Negotiate. Deal done. "Congrats, Emma." Champagne.</p>
@@ -329,8 +355,8 @@
 
     <div class="step">
       <div class="step-content">
-        <p class="step-num">Step 2</p>
-        <h3 class="step-title">The track record, organised</h3>
+        <div class="step-num-row"><div class="step-num-circle"><svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#67DE89" stroke="#161616" stroke-width="2"/><path d="M7 12.5L10.5 16L17 8" fill="none" stroke="#161616" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 12.5L10.5 16L17 8" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><p class="step-num">Step 2</p></div>
+        <h3 class="step-title">the track record, organised</h3>
         <p class="step-text">$17.9M in 2024. $42.6M in 2025. $21.1M so far in 2026. Five-plus years in Melbourne through volatile markets. $1.26M in gross commission introduced.</p>
       </div>
       <div class="step-photo step2-visual">
@@ -357,8 +383,8 @@
 
     <div class="step">
       <div class="step-content">
-        <p class="step-num">Step 3</p>
-        <h3 class="step-title">My skills & instincts become your pipeline</h3>
+        <div class="step-num-row"><div class="step-num-circle"><svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#67DE89" stroke="#161616" stroke-width="2"/><path d="M7 12.5L10.5 16L17 8" fill="none" stroke="#161616" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 12.5L10.5 16L17 8" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><p class="step-num">Step 3</p></div>
+        <h3 class="step-title">my skills & instincts become your pipeline</h3>
         <p class="step-text">Real estate taught me how to come up with my own leads. I built the whole pipeline from zero to 900. I've already got the sales skills and the instincts, ready to take on the next challenge. Tech is a natural fit for me. Put me somewhere that rewards actually chasing a target, I'll keep showing up for it and we might even have some fun along the way.</p>
       </div>
       <div class="step-photo media-scatter">
@@ -376,8 +402,8 @@
 
     <div class="step">
       <div class="step-content">
-        <p class="step-num">Step 4</p>
-        <h3 class="step-title">Why Cuttable, why now</h3>
+        <div class="step-num-row"><div class="step-num-circle"><svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#67DE89" stroke="#161616" stroke-width="2"/><path d="M7 12.5L10.5 16L17 8" fill="none" stroke="#161616" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 12.5L10.5 16L17 8" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><p class="step-num">Step 4</p></div>
+        <h3 class="step-title">why cuttable, why now</h3>
         <p class="step-text">AI is about to break open advertising's real bottleneck, and Cuttable's right in the middle of it. What you're building gives a growing brand the access to the kind of creative that used to be reserved for the big players.</p>
         <p class="step-text">I've felt those exact pain points firsthand growing my own brand, in real estate and with Sold Off Market.</p>
         <p class="step-text">I don't buy that good ads are dead. We are just flooded with generic ones (every time I hear "at brand X, we believe in X" I almost pass out). But we all remember when ads told a story, or inspired an emotion or a reaction, and actually stuck. That's a mission I can get behind.</p>
@@ -390,7 +416,7 @@
 
   <div class="cta-row">
     <a class="contact-btn" href="cv.pdf" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:8px;">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M6 2H14L19 7V22H6V2Z" stroke="#111111" stroke-width="2" stroke-linejoin="round"/><path d="M14 2V7H19" stroke="#111111" stroke-width="2" stroke-linejoin="round"/></svg>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M6 2H14L19 7V22H6V2Z" stroke="#161616" stroke-width="2" stroke-linejoin="round"/><path d="M14 2V7H19" stroke="#161616" stroke-width="2" stroke-linejoin="round"/></svg>
       Ok, show us what you've shipped
     </a>
   </div>
@@ -440,7 +466,7 @@
 
   <div class="getintouch">
     <h2>I am French, I am used to making the first move.</h2>
-    <p>I'd love to work with you. Coffee's on me, you pick when.</p>
+    <p>i'd love to work with you. let's jump on a call. you pick when.</p>
     <div class="contact-btn-wrap">
       <button class="email" onclick="toggleMenu(this)">book a demo</button>
       <div class="contact-menu">
