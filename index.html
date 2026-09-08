@@ -302,14 +302,33 @@
     .wrap { padding: 0 20px; }
     header.top { padding: 20px; }
 
-    .hero { grid-template-columns: 1.3fr 1fr; gap: 16px; padding: 28px 0 40px; align-items: start; }
-    h1 { font-size: 22px; }
-    .hero p.sub { font-size: 13px; margin-bottom: 18px; }
-    .eyebrow { margin-bottom: 10px; }
-    .hero-photo { width: 100%; max-height: none; justify-self: stretch; align-self: start; aspect-ratio: 9 / 16; }
+    .hero {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      grid-template-areas:
+        "eyebrow photo"
+        "heading photo"
+        "sub photo"
+        "stats stats";
+      column-gap: 16px;
+      row-gap: 6px;
+      padding: 28px 0 40px;
+      align-items: start;
+    }
+    .hero > div:first-child { display: contents; }
+    .hero .eyebrow { grid-area: eyebrow; margin-bottom: 10px; }
+    .hero h1 { grid-area: heading; font-size: 22px; }
+    .hero p.sub { grid-area: sub; font-size: 13px; margin-bottom: 0; }
+    .hero-photo { grid-area: photo; width: 100%; max-height: none; aspect-ratio: 9 / 16; }
     .hero-photo img { object-fit: contain; }
-    .statline { gap: 12px 16px; flex-direction: column; }
-    .stat .num { font-size: 17px; }
+    .statline {
+      grid-area: stats;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px 16px;
+      margin-top: 24px;
+    }
+    .stat .num { font-size: 20px; }
 
     .step { grid-template-columns: 1fr; gap: 24px; padding: 36px 0; }
     .step:nth-child(even) .step-content { order: 1; }
