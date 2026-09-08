@@ -576,13 +576,13 @@
       </div>
     </div>
     <div class="t-dots">
-      <button class="t-dot active" onclick="goToTestimonial(0)" aria-label="Testimonial 1"></button>
-      <button class="t-dot" onclick="goToTestimonial(1)" aria-label="Testimonial 2"></button>
-      <button class="t-dot" onclick="goToTestimonial(2)" aria-label="Testimonial 3"></button>
-      <button class="t-dot" onclick="goToTestimonial(3)" aria-label="Testimonial 4"></button>
-      <button class="t-dot" onclick="goToTestimonial(4)" aria-label="Testimonial 5"></button>
-      <button class="t-dot" onclick="goToTestimonial(5)" aria-label="Testimonial 6"></button>
-      <button class="t-dot" onclick="goToTestimonial(6)" aria-label="Testimonial 7"></button>
+      <button class="t-dot active" onclick="goToTestimonial(0); restartTAutoAdvance();" aria-label="Testimonial 1"></button>
+      <button class="t-dot" onclick="goToTestimonial(1); restartTAutoAdvance();" aria-label="Testimonial 2"></button>
+      <button class="t-dot" onclick="goToTestimonial(2); restartTAutoAdvance();" aria-label="Testimonial 3"></button>
+      <button class="t-dot" onclick="goToTestimonial(3); restartTAutoAdvance();" aria-label="Testimonial 4"></button>
+      <button class="t-dot" onclick="goToTestimonial(4); restartTAutoAdvance();" aria-label="Testimonial 5"></button>
+      <button class="t-dot" onclick="goToTestimonial(5); restartTAutoAdvance();" aria-label="Testimonial 6"></button>
+      <button class="t-dot" onclick="goToTestimonial(6); restartTAutoAdvance();" aria-label="Testimonial 7"></button>
     </div>
   </div>
 
@@ -642,15 +642,42 @@
   })();
 
 
-  function goToTestimonial(i) {
-    document.querySelectorAll('.t-card').forEach(function(c, idx) { c.classList.toggle('active', idx === i); });
-    document.querySelectorAll('.t-dot').forEach(function(d, idx) { d.classList.toggle('active', idx === i); });
-  }
   var tIndex = 0;
-  setInterval(function() {
-    var cards = document.querySelectorAll('.t-card');
-    if (cards.length) { tIndex = (tIndex + 1) % cards.length; goToTestimonial(tIndex); }
+  var tCardCount = document.querySelectorAll('.t-card').length;
+  function goToTestimonial(i) {
+    tIndex = (i + tCardCount) % tCardCount;
+    document.querySelectorAll('.t-card').forEach(function(c, idx) { c.classList.toggle('active', idx === tIndex); });
+    document.querySelectorAll('.t-dot').forEach(function(d, idx) { d.classList.toggle('active', idx === tIndex); });
+  }
+  var tAutoAdvance = setInterval(function() {
+    if (tCardCount) goToTestimonial(tIndex + 1);
   }, 5000);
+  function restartTAutoAdvance() {
+    clearInterval(tAutoAdvance);
+    tAutoAdvance = setInterval(function() {
+      if (tCardCount) goToTestimonial(tIndex + 1);
+    }, 5000);
+  }
+
+  var tTrack = document.querySelector('.t-track');
+  if (tTrack) {
+    var tTouchStartX = 0;
+    var tTouchDeltaX = 0;
+    tTrack.addEventListener('touchstart', function(e) {
+      tTouchStartX = e.touches[0].clientX;
+      tTouchDeltaX = 0;
+    }, { passive: true });
+    tTrack.addEventListener('touchmove', function(e) {
+      tTouchDeltaX = e.touches[0].clientX - tTouchStartX;
+    }, { passive: true });
+    tTrack.addEventListener('touchend', function() {
+      var swipeThreshold = 40;
+      if (Math.abs(tTouchDeltaX) > swipeThreshold) {
+        if (tTouchDeltaX < 0) { goToTestimonial(tIndex + 1); } else { goToTestimonial(tIndex - 1); }
+        restartTAutoAdvance();
+      }
+    });
+  }
   var lazyVideos = Array.from(document.querySelectorAll('video[data-src]'));
   var groupIds = [];
   lazyVideos.forEach(function(v) {
