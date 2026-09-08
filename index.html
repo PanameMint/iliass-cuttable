@@ -359,9 +359,71 @@
     .stat .num { font-size: 15px; }
     .step2-stat { flex: 1 1 100%; }
   }
+
+  .qr-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(22,22,22,0.55);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .qr-modal-overlay.show { display: flex; }
+  .qr-modal {
+    background: var(--paper);
+    border-radius: 24px;
+    padding: 32px 24px;
+    max-width: 360px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 20px 48px rgba(0,0,0,0.2);
+  }
+  .qr-modal-title { font-size: 19px; font-weight: 600; letter-spacing: -0.01em; margin: 0 0 10px; }
+  .qr-modal-sub { font-size: 14px; color: var(--muted); margin: 0 0 24px; line-height: 1.5; }
+  .qr-modal-actions { display: flex; flex-direction: column; gap: 10px; }
+  .qr-modal-btn {
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    padding: 13px 20px;
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+  }
+  .qr-modal-btn.primary { background: var(--lime); color: var(--ink); }
+  .qr-modal-btn.secondary { background: none; color: var(--muted); text-decoration: underline; padding: 8px; }
+  .qr-modal .contact-btn-wrap { position: relative; width: 100%; }
+  .qr-modal .qr-menu {
+    position: static;
+    box-shadow: none;
+    border: 1px solid var(--line);
+    margin-top: 8px;
+    text-align: left;
+  }
 </style>
 </head>
 <body>
+
+<div class="qr-modal-overlay" id="qrModalOverlay">
+  <div class="qr-modal">
+    <p class="qr-modal-title">This one's better on desktop</p>
+    <p class="qr-modal-sub">Everything works on mobile too, it just shines a bit more on a bigger screen. Want to save the link for later?</p>
+    <div class="qr-modal-actions">
+      <div class="contact-btn-wrap">
+        <button class="qr-modal-btn primary" onclick="toggleQrMenu(this)">send me this link</button>
+        <div class="contact-menu qr-menu">
+          <a id="qrEmailLink" href="#">Email me the link<span class="sub">Open on desktop later</span></a>
+          <a id="qrSmsLink" href="#">Text me the link<span class="sub">Open on desktop later</span></a>
+        </div>
+      </div>
+      <button class="qr-modal-btn secondary" onclick="closeQrModal()">view on mobile anyway</button>
+    </div>
+  </div>
+</div>
 
 <header class="top">
   <div class="mark">
@@ -405,10 +467,10 @@
         <p class="step-text">30-35 of these, start to finish, every year.</p>
       </div>
       <div class="step-photo video-grid">
-        <video data-src="listing-1.mp4" muted loop playsinline preload="none"></video>
-        <video data-src="listing-2.mp4" muted loop playsinline preload="none"></video>
-        <video data-src="listing-3.mp4" muted loop playsinline preload="none"></video>
-        <video data-src="listing-4.mp4" muted loop playsinline preload="none"></video>
+        <video data-src="listing-1.mp4" poster="listing-1-poster.jpg" data-group="1" muted loop playsinline preload="none"></video>
+        <video data-src="listing-2.mp4" poster="listing-2-poster.jpg" data-group="1" muted loop playsinline preload="none"></video>
+        <video data-src="listing-3.mp4" poster="listing-3-poster.jpg" data-group="1" muted loop playsinline preload="none"></video>
+        <video data-src="listing-4.mp4" poster="listing-4-poster.jpg" data-group="1" muted loop playsinline preload="none"></video>
       </div>
     </div>
 
@@ -450,12 +512,12 @@
       <div class="step-photo media-scatter">
         <div class="wheel">
           <div class="m-card-wrap" style="top:6.5%; left:40.5%;"><div class="m-card"><img src="photo-1.jpg" alt=""/></div></div>
-          <div class="m-card-wrap" style="top:18.9%; left:66.3%;"><div class="m-card"><video data-src="video-1.mp4" muted loop playsinline preload="none"></video></div></div>
+          <div class="m-card-wrap" style="top:18.9%; left:66.3%;"><div class="m-card"><video data-src="video-1.mp4" poster="video-1-poster.jpg" data-group="2" muted loop playsinline preload="none"></video></div></div>
           <div class="m-card-wrap" style="top:46.8%; left:72.7%;"><div class="m-card"><img src="photo-2.jpg" alt=""/></div></div>
           <div class="m-card-wrap" style="top:69.2%; left:54.8%;"><div class="m-card"><img src="photo-3.JPG" alt=""/></div></div>
-          <div class="m-card-wrap" style="top:69.2%; left:26.2%;"><div class="m-card"><video data-src="video-2.mp4" muted loop playsinline preload="none"></video></div></div>
+          <div class="m-card-wrap" style="top:69.2%; left:26.2%;"><div class="m-card"><video data-src="video-2.mp4" poster="video-2-poster.jpg" data-group="2" muted loop playsinline preload="none"></video></div></div>
           <div class="m-card-wrap" style="top:46.8%; left:8.3%;"><div class="m-card"><img src="photo-5.jpg" alt=""/></div></div>
-          <div class="m-card-wrap" style="top:18.9%; left:14.7%;"><div class="m-card"><video data-src="video-3.mp4" muted loop playsinline preload="none"></video></div></div>
+          <div class="m-card-wrap" style="top:18.9%; left:14.7%;"><div class="m-card"><video data-src="video-3.mp4" poster="video-3-poster.jpg" data-group="2" muted loop playsinline preload="none"></video></div></div>
         </div>
       </div>
     </div>
@@ -555,6 +617,31 @@
     }
   });
 
+  function toggleQrMenu(btn) { toggleMenu(btn); }
+
+  function closeQrModal() {
+    var overlay = document.getElementById('qrModalOverlay');
+    overlay.classList.remove('show');
+    try { sessionStorage.setItem('qrModalSeen', '1'); } catch (e) {}
+  }
+
+  (function initQrModal() {
+    var isMobile = window.matchMedia('(max-width: 720px)').matches;
+    var alreadySeen = false;
+    try { alreadySeen = sessionStorage.getItem('qrModalSeen') === '1'; } catch (e) {}
+    if (!isMobile || alreadySeen) return;
+
+    var url = window.location.href;
+    var emailLink = document.getElementById('qrEmailLink');
+    var smsLink = document.getElementById('qrSmsLink');
+    var body = 'Here\'s the link: ' + url;
+    if (emailLink) emailLink.href = 'mailto:?subject=' + encodeURIComponent('Iliass x Cuttable') + '&body=' + encodeURIComponent(body);
+    if (smsLink) smsLink.href = 'sms:&body=' + encodeURIComponent(body);
+
+    document.getElementById('qrModalOverlay').classList.add('show');
+  })();
+
+
   function goToTestimonial(i) {
     document.querySelectorAll('.t-card').forEach(function(c, idx) { c.classList.toggle('active', idx === i); });
     document.querySelectorAll('.t-dot').forEach(function(d, idx) { d.classList.toggle('active', idx === i); });
@@ -565,18 +652,36 @@
     if (cards.length) { tIndex = (tIndex + 1) % cards.length; goToTestimonial(tIndex); }
   }, 5000);
   var lazyVideos = Array.from(document.querySelectorAll('video[data-src]'));
-  function loadNextVideo(i) {
-    if (i >= lazyVideos.length) return;
-    var v = lazyVideos[i];
-    v.addEventListener('canplaythrough', function onReady() {
-      v.removeEventListener('canplaythrough', onReady);
-      v.play().catch(function() {});
-      loadNextVideo(i + 1);
+  var groupIds = [];
+  lazyVideos.forEach(function(v) {
+    var g = v.dataset.group || '0';
+    if (groupIds.indexOf(g) === -1) groupIds.push(g);
+  });
+
+  function loadVideo(v) {
+    return new Promise(function(resolve) {
+      v.addEventListener('canplay', function onReady() {
+        v.removeEventListener('canplay', onReady);
+        v.play().catch(function() {});
+        resolve();
+      });
+      v.src = v.dataset.src;
+      v.load();
     });
-    v.src = v.dataset.src;
-    v.load();
   }
-  loadNextVideo(0);
+
+  function loadGroup(groupId) {
+    var groupVideos = lazyVideos.filter(function(v) { return (v.dataset.group || '0') === groupId; });
+    return Promise.all(groupVideos.map(loadVideo));
+  }
+
+  function loadGroupsInOrder(i) {
+    if (i >= groupIds.length) return;
+    loadGroup(groupIds[i]).then(function() {
+      loadGroupsInOrder(i + 1);
+    });
+  }
+  loadGroupsInOrder(0);
 </script>
 
 </body>
