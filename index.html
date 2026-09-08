@@ -299,9 +299,48 @@
   footer a { color: var(--muted); }
 
   @media (max-width: 720px) {
-    .hero { grid-template-columns: 1fr; }
-    h1 { font-size: 32px; }
+    .wrap { padding: 0 20px; }
     header.top { padding: 20px; }
+
+    .hero { grid-template-columns: 1fr; gap: 28px; padding: 32px 0 48px; }
+    h1 { font-size: 28px; }
+    .hero p.sub { font-size: 15px; }
+    .hero-photo { width: 100%; max-height: none; justify-self: stretch; align-self: auto; aspect-ratio: 4 / 3; }
+    .statline { gap: 20px 28px; }
+
+    .step { grid-template-columns: 1fr; gap: 24px; padding: 36px 0; }
+    .step:nth-child(even) .step-content { order: 1; }
+    .step:nth-child(even) .step-photo { order: 2; }
+    .step-title { font-size: 20px; }
+    .step-text { font-size: 15px; }
+    .step .step-photo { aspect-ratio: 16 / 10; }
+
+    .step2-visual {
+      grid-template-columns: 1fr;
+      transform: none;
+      padding: 20px;
+    }
+    .step2-photo-inner { aspect-ratio: 16 / 9; }
+    .step2-stats { flex-direction: row; flex-wrap: wrap; gap: 16px 24px; }
+    .step2-stat { flex: 1 1 40%; }
+
+    .step .step-photo.media-scatter { aspect-ratio: 1 / 1; max-width: 320px; margin: 0 auto; }
+    .wheel, .m-card-wrap { animation: none; }
+
+    .t-quote { font-size: 19px; }
+    .testimonial p.quote { font-size: 22px; }
+
+    .getintouch { padding: 32px 24px; }
+    .getintouch h2 { font-size: 22px; }
+
+    footer { flex-direction: column; align-items: flex-start; gap: 8px; }
+  }
+
+  @media (max-width: 420px) {
+    h1 { font-size: 24px; }
+    .stat .num { font-size: 18px; }
+    .statline { gap: 16px 20px; }
+    .step2-stat { flex: 1 1 100%; }
   }
 </style>
 </head>
