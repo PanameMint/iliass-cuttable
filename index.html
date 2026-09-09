@@ -258,7 +258,10 @@
   .t-track { position: relative; min-height: 140px; overflow: hidden; }
   .t-strip { display: flex; transition: transform 0.4s cubic-bezier(.22,.61,.36,1); touch-action: pan-y; }
   .t-card {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     flex: 0 0 100%;
     max-width: 640px;
     margin: 0 auto;
