@@ -32,6 +32,7 @@
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
+  html, body { overflow-x: hidden; }
   body {
     margin: 0;
     background: var(--paper);
@@ -254,14 +255,17 @@
   }
 
   .testimonials { padding: 16px 0 64px; }
-  .t-track { position: relative; min-height: 140px; }
+  .t-track { position: relative; min-height: 140px; overflow: hidden; }
+  .t-strip { display: flex; transition: transform 0.4s cubic-bezier(.22,.61,.36,1); touch-action: pan-y; }
   .t-card {
-    display: none;
-    text-align: center;
+    display: block;
+    flex: 0 0 100%;
     max-width: 640px;
     margin: 0 auto;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 0 4px;
   }
-  .t-card.active { display: block; }
   .t-quote { font-size: 22px; font-weight: 500; line-height: 1.4; letter-spacing: -0.01em; margin: 0 0 16px; }
   .t-who { font-size: 14px; color: var(--muted); margin: 0; }
   .t-dots { display: flex; justify-content: center; gap: 8px; margin-top: 28px; }
@@ -523,10 +527,10 @@
       </div>
       <div class="step-photo media-scatter">
         <div class="wheel">
-          <div class="m-card-wrap" style="top:6.5%; left:40.5%;"><div class="m-card"><video data-src="video-4.mp4" poster="video-4-poster.jpg" data-group="2" muted loop playsinline preload="none"></video></div></div>
+          <div class="m-card-wrap" style="top:69.2%; left:54.8%;"><div class="m-card"><video data-src="video-4.mp4" poster="video-4-poster.jpg" data-group="2" muted loop playsinline preload="none"></video></div></div>
           <div class="m-card-wrap" style="top:18.9%; left:66.3%;"><div class="m-card"><video data-src="video-1.mp4" poster="video-1-poster.jpg" data-group="2" muted loop playsinline preload="none"></video></div></div>
           <div class="m-card-wrap" style="top:46.8%; left:72.7%;"><div class="m-card"><img src="photo-2.jpg" alt=""/></div></div>
-          <div class="m-card-wrap" style="top:69.2%; left:54.8%;"><div class="m-card"><img src="photo-3.JPG" alt=""/></div></div>
+          <div class="m-card-wrap" style="top:6.5%; left:40.5%;"><div class="m-card"><img src="photo-3.JPG" alt=""/></div></div>
           <div class="m-card-wrap" style="top:69.2%; left:26.2%;"><div class="m-card"><video data-src="video-2.mp4" poster="video-2-poster.jpg" data-group="2" muted loop playsinline preload="none"></video></div></div>
           <div class="m-card-wrap" style="top:46.8%; left:8.3%;"><div class="m-card"><img src="photo-5.jpg" alt=""/></div></div>
           <div class="m-card-wrap" style="top:18.9%; left:14.7%;"><div class="m-card"><video data-src="video-3.mp4" poster="video-3-poster.jpg" data-group="2" muted loop playsinline preload="none"></video></div></div>
@@ -559,6 +563,7 @@
   <div class="testimonials">
     <p class="eyebrow" style="text-align:center;">Don't take my word for it</p>
     <div class="t-track">
+      <div class="t-strip">
       <div class="t-card active">
         <p class="t-quote">"From the outset, Iliass was professional, responsive and easy to deal with. ... Iliass was able to quickly find us a qualified, no-fuss buyer at a price solidly above our reserve/requirements."</p>
         <p class="t-who">Seller, apartment in Melbourne</p>
@@ -586,6 +591,7 @@
       <div class="t-card">
         <p class="t-quote">"From the moment we had our first meeting, Iliass impressed me with his promptness, his fact based information, and his relaxed yet professional attitude. Iliass was open and honest through all stages of our campaign. Whilst the 'selling' journey is emotional, Iliass guided me through the campaign with clear/concise communications. His personal negotiations with buyers cemented what was an enviable result."</p>
         <p class="t-who">Seller, apartment in St Kilda</p>
+      </div>
       </div>
     </div>
     <div class="t-dots">
@@ -658,10 +664,19 @@
 
   var tIndex = 0;
   var tCardCount = document.querySelectorAll('.t-card').length;
+  var tTrack = document.querySelector('.t-track');
+  var tStrip = document.querySelector('.t-strip');
+
+  function tSetTransform(px, animate) {
+    if (!tStrip) return;
+    tStrip.style.transition = animate ? '' : 'none';
+    tStrip.style.transform = 'translateX(' + px + 'px)';
+  }
   function goToTestimonial(i) {
     tIndex = (i + tCardCount) % tCardCount;
     document.querySelectorAll('.t-card').forEach(function(c, idx) { c.classList.toggle('active', idx === tIndex); });
     document.querySelectorAll('.t-dot').forEach(function(d, idx) { d.classList.toggle('active', idx === tIndex); });
+    if (tTrack) tSetTransform(-tIndex * tTrack.getBoundingClientRect().width, true);
   }
   var tAutoAdvance = setInterval(function() {
     if (tCardCount) goToTestimonial(tIndex + 1);
@@ -673,25 +688,44 @@
     }, 5000);
   }
 
-  var tTrack = document.querySelector('.t-track');
-  if (tTrack) {
+  if (tTrack && tStrip) {
     var tTouchStartX = 0;
     var tTouchDeltaX = 0;
+    var tDragging = false;
+    var tWidth = 0;
+
     tTrack.addEventListener('touchstart', function(e) {
+      tWidth = tTrack.getBoundingClientRect().width;
       tTouchStartX = e.touches[0].clientX;
       tTouchDeltaX = 0;
+      tDragging = true;
+      clearInterval(tAutoAdvance);
+      tSetTransform(-tIndex * tWidth, false);
     }, { passive: true });
+
     tTrack.addEventListener('touchmove', function(e) {
+      if (!tDragging) return;
       tTouchDeltaX = e.touches[0].clientX - tTouchStartX;
+      tSetTransform(-tIndex * tWidth + tTouchDeltaX, false);
     }, { passive: true });
-    tTrack.addEventListener('touchend', function() {
-      var swipeThreshold = 40;
-      if (Math.abs(tTouchDeltaX) > swipeThreshold) {
-        if (tTouchDeltaX < 0) { goToTestimonial(tIndex + 1); } else { goToTestimonial(tIndex - 1); }
-        restartTAutoAdvance();
+
+    function tEndDrag() {
+      if (!tDragging) return;
+      tDragging = false;
+      var threshold = Math.min(80, tWidth * 0.18);
+      if (Math.abs(tTouchDeltaX) > threshold) {
+        goToTestimonial(tIndex + (tTouchDeltaX < 0 ? 1 : -1));
+      } else {
+        goToTestimonial(tIndex);
       }
-    });
+      restartTAutoAdvance();
+    }
+    tTrack.addEventListener('touchend', tEndDrag);
+    tTrack.addEventListener('touchcancel', tEndDrag);
   }
+
+  window.addEventListener('resize', function() { goToTestimonial(tIndex); });
+
   var lazyVideos = Array.from(document.querySelectorAll('video[data-src]'));
   var groupIds = [];
   lazyVideos.forEach(function(v) {
