@@ -259,15 +259,18 @@
   .t-strip { display: flex; transition: transform 0.4s cubic-bezier(.22,.61,.36,1); touch-action: pan-y; }
   .t-card {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     flex: 0 0 100%;
-    max-width: 640px;
-    margin: 0 auto;
-    text-align: center;
+    width: 100%;
     box-sizing: border-box;
     padding: 0 4px;
+  }
+  .t-card-inner {
+    max-width: 640px;
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
   }
   .t-quote { font-size: 22px; font-weight: 500; line-height: 1.4; letter-spacing: -0.01em; margin: 0 0 16px; }
   .t-who { font-size: 14px; color: var(--muted); margin: 0; }
@@ -379,71 +382,9 @@
     .stat .num { font-size: 15px; }
     .step2-stat { flex: 1 1 100%; }
   }
-
-  .qr-modal-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(22,22,22,0.55);
-    z-index: 100;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
-  }
-  .qr-modal-overlay.show { display: flex; }
-  .qr-modal {
-    background: var(--paper);
-    border-radius: 24px;
-    padding: 32px 24px;
-    max-width: 360px;
-    width: 100%;
-    text-align: center;
-    box-shadow: 0 20px 48px rgba(0,0,0,0.2);
-  }
-  .qr-modal-title { font-size: 19px; font-weight: 600; letter-spacing: -0.01em; margin: 0 0 10px; }
-  .qr-modal-sub { font-size: 14px; color: var(--muted); margin: 0 0 24px; line-height: 1.5; }
-  .qr-modal-actions { display: flex; flex-direction: column; gap: 10px; }
-  .qr-modal-btn {
-    font-family: inherit;
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: -0.3px;
-    padding: 13px 20px;
-    border-radius: 100px;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-  }
-  .qr-modal-btn.primary { background: var(--lime); color: var(--ink); }
-  .qr-modal-btn.secondary { background: none; color: var(--muted); text-decoration: underline; padding: 8px; }
-  .qr-modal .contact-btn-wrap { position: relative; width: 100%; }
-  .qr-modal .qr-menu {
-    position: static;
-    box-shadow: none;
-    border: 1px solid var(--line);
-    margin-top: 8px;
-    text-align: left;
-  }
 </style>
 </head>
 <body>
-
-<div class="qr-modal-overlay" id="qrModalOverlay">
-  <div class="qr-modal">
-    <p class="qr-modal-title">This one's better on desktop</p>
-    <p class="qr-modal-sub">Everything works on mobile too, it just shines a bit more on a bigger screen. Want to save the link for later?</p>
-    <div class="qr-modal-actions">
-      <div class="contact-btn-wrap">
-        <button class="qr-modal-btn primary" onclick="toggleQrMenu(this)">send me this link</button>
-        <div class="contact-menu qr-menu">
-          <a id="qrEmailLink" href="#">Email me the link<span class="sub">Open on desktop later</span></a>
-          <a id="qrSmsLink" href="#">Text me the link<span class="sub">Open on desktop later</span></a>
-        </div>
-      </div>
-      <button class="qr-modal-btn secondary" onclick="closeQrModal()">view on mobile anyway</button>
-    </div>
-  </div>
-</div>
 
 <header class="top">
   <div class="mark">
@@ -568,32 +509,46 @@
     <div class="t-track">
       <div class="t-strip">
       <div class="t-card active">
+        <div class="t-card-inner">
         <p class="t-quote">"From the outset, Iliass was professional, responsive and easy to deal with. ... Iliass was able to quickly find us a qualified, no-fuss buyer at a price solidly above our reserve/requirements."</p>
         <p class="t-who">Seller, apartment in Melbourne</p>
+        </div>
       </div>
       <div class="t-card">
+        <div class="t-card-inner">
         <p class="t-quote">"From the very first meeting he was engaging, confident and very knowledgeable. He was calm, consistent yet determined throughout the sale process and very responsive at all times. He conducted the sale process with integrity and was respectful of all parties."</p>
         <p class="t-who">Seller, apartment in Elwood</p>
+        </div>
       </div>
       <div class="t-card">
+        <div class="t-card-inner">
         <p class="t-quote">"I am the one who knocks!"</p>
         <p class="t-who">Walter White</p>
+        </div>
       </div>
       <div class="t-card">
+        <div class="t-card-inner">
         <p class="t-quote">"This was a stressful sale and Iliass went out of his way to reassure me through the process. The property was on the market for 10 months with another agent and Iliass sold it in 4 weeks. He was professional and also helped us in finding a rental. He genuinely went above and beyond for us."</p>
         <p class="t-who">Seller, apartment in Southbank</p>
+        </div>
       </div>
       <div class="t-card">
+        <div class="t-card-inner">
         <p class="t-quote">"I was so impressed with Iliass Okaf who I found to be a lovely, genuine person. Iliass goes that extra mile to make sure clients needs are met, and is very knowledgeable about the real estate market."</p>
         <p class="t-who">Buyer, apartment in St Kilda</p>
+        </div>
       </div>
       <div class="t-card">
+        <div class="t-card-inner">
         <p class="t-quote">"I had the pleasure of working with Iliass when selling my property, & I couldn't be more impressed. He was professional, knowledgeable, & always available to answer my questions. ... His dedication & attention to detail made the entire process smooth & stress-free."</p>
         <p class="t-who">Seller, apartment in Southbank</p>
+        </div>
       </div>
       <div class="t-card">
+        <div class="t-card-inner">
         <p class="t-quote">"From the moment we had our first meeting, Iliass impressed me with his promptness, his fact based information, and his relaxed yet professional attitude. Iliass was open and honest through all stages of our campaign. Whilst the 'selling' journey is emotional, Iliass guided me through the campaign with clear/concise communications. His personal negotiations with buyers cemented what was an enviable result."</p>
         <p class="t-who">Seller, apartment in St Kilda</p>
+        </div>
       </div>
       </div>
     </div>
@@ -638,31 +593,6 @@
       document.querySelectorAll('.contact-menu.open').forEach(function(m) { m.classList.remove('open'); });
     }
   });
-
-  function toggleQrMenu(btn) { toggleMenu(btn); }
-
-  function closeQrModal() {
-    var overlay = document.getElementById('qrModalOverlay');
-    overlay.classList.remove('show');
-  }
-
-  (function initQrModal() {
-    var isMobile = window.matchMedia('(max-width: 720px)').matches;
-    var alreadySeen = false;
-    try { alreadySeen = localStorage.getItem('qrModalSeen') === '1'; } catch (e) {}
-    if (!isMobile || alreadySeen) return;
-
-    try { localStorage.setItem('qrModalSeen', '1'); } catch (e) {}
-
-    var url = window.location.href;
-    var emailLink = document.getElementById('qrEmailLink');
-    var smsLink = document.getElementById('qrSmsLink');
-    var body = 'Here\'s the link: ' + url;
-    if (emailLink) emailLink.href = 'mailto:?subject=' + encodeURIComponent('Iliass x Cuttable') + '&body=' + encodeURIComponent(body);
-    if (smsLink) smsLink.href = 'sms:&body=' + encodeURIComponent(body);
-
-    document.getElementById('qrModalOverlay').classList.add('show');
-  })();
 
 
   var tIndex = 0;
@@ -725,6 +655,25 @@
     }
     tTrack.addEventListener('touchend', tEndDrag);
     tTrack.addEventListener('touchcancel', tEndDrag);
+
+    var tWheelAccum = 0;
+    var tWheelCooldown = false;
+    var tWheelResetTimer = null;
+    tTrack.addEventListener('wheel', function(e) {
+      if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
+      e.preventDefault();
+      if (tWheelCooldown) return;
+      tWheelAccum += e.deltaX;
+      clearTimeout(tWheelResetTimer);
+      tWheelResetTimer = setTimeout(function() { tWheelAccum = 0; }, 150);
+      if (Math.abs(tWheelAccum) > 60) {
+        goToTestimonial(tIndex + (tWheelAccum > 0 ? 1 : -1));
+        restartTAutoAdvance();
+        tWheelAccum = 0;
+        tWheelCooldown = true;
+        setTimeout(function() { tWheelCooldown = false; }, 500);
+      }
+    }, { passive: false });
   }
 
   window.addEventListener('resize', function() { goToTestimonial(tIndex); });
