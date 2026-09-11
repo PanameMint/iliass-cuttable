@@ -200,9 +200,9 @@
   .step2-photo-inner img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .step2-photo-overlay {
     position: absolute;
-    left: 3%;
+    left: 0;
     top: 50%;
-    width: 94%;
+    width: 100%;
     transform: translateY(-50%) rotate(-8deg);
     transform-origin: center;
     pointer-events: none;
@@ -211,16 +211,21 @@
     margin: 0;
     color: #fff;
     line-height: 1.15;
-    font-size: clamp(16px, 4vw, 24px);
-    font-size: 7.4cqw;
     text-shadow: 0 1px 8px rgba(0,0,0,0.35);
     white-space: nowrap;
   }
   .step2-photo-overlay .line1 {
     font-weight: 400;
+    text-align: right;
+    font-size: clamp(14px, 3.4vw, 20px);
+    font-size: 6.2cqw;
   }
   .step2-photo-overlay .line2 {
     font-weight: 800;
+    display: inline-block;
+    transform-origin: left center;
+    font-size: clamp(16px, 4vw, 24px);
+    font-size: 7.4cqw;
   }
   .step2-stats { display: flex; flex-direction: column; justify-content: center; gap: 18px; }
   .step2-stat .stat-label { font-size: 13px; color: var(--ink); font-weight: 500; margin: 0 0 2px; }
@@ -776,6 +781,24 @@
   }
 
   window.addEventListener('resize', function() { goToTestimonial(tIndex); });
+
+  function fitStep2OverlayLine2() {
+    var container = document.querySelector('.step2-photo-overlay');
+    var line2 = document.querySelector('.step2-photo-overlay .line2');
+    if (!container || !line2) return;
+    line2.style.transform = 'none';
+    var containerWidth = container.offsetWidth;
+    var textWidth = line2.offsetWidth;
+    if (containerWidth > 0 && textWidth > 0) {
+      var scale = containerWidth / textWidth;
+      line2.style.transform = 'scaleX(' + scale + ')';
+    }
+  }
+  fitStep2OverlayLine2();
+  window.addEventListener('resize', fitStep2OverlayLine2);
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(fitStep2OverlayLine2);
+  }
 
   var lazyVideos = Array.from(document.querySelectorAll('video[data-src]'));
   var groupIds = [];
